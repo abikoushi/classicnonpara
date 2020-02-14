@@ -2,3 +2,4 @@
 
 まだ書きかけです.
 
+https://github.com/abikoushi/classicnonpara/blob/master/classicnonpara.pdf
