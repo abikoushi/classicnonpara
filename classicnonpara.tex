@@ -1,10 +1,10 @@
-\documentclass[11pt]{amsart}
-\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
-\geometry{a4paper}                   % ... or a4paper or a5paper or ... 
+\documentclass[12pt]{jsarticle}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{a4paper}                   % ... or a4paper or a5paper or ... 
 %\geometry{landscape}                % Activate for for rotated page geometry
 %\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{graphicx}
-\usepackage{amssymb}
+\usepackage{amsmath, amssymb}
 \usepackage{epstopdf}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
@@ -15,18 +15,24 @@
 \begin{document}
 \maketitle
 \section{前置き}
+
 もともと工学部出身のぼくが, 医学系の研究室に行っておもしろかったことはいろいろある. 
+
 その中の一つが, 医学系の人のアーチファクト（artifact）という言葉の使い方だ. 
+
 アーチファクトというのは, 辞書的には人工物とか工芸品を指す.
+
 ぼくの感覚からしたら「この結果はアーチファクトだよ」と言われたら褒められているのかな？　みたいな感じがする.
+
 でも違う. 医学系の言葉使いではアーチファクトというのは, 自然現象とか生命現象の本質じゃない人工的な混ざりもの, みたいなイメージだ.
 
 ところで, ぼくは統計モデリングというのが好きだ. モデリングというのはデータを取った人からいろいろ話を聞いて, 関数とか確率分布とか微分方程式とか差分方程式とかを組み合わせて, データを取った人のイメージとか目的とかを統計の言葉に翻訳するような作業だ. モデルを作るというのは, ぼくの感覚では仮定を置くことに等しい. 
+
 それはもうアーチファクトのかたまりみたいな作業だ.
 
-そのせいかどうかは知らないが, 医学系の人は検定が好きな印象がある. 統計屋というと, いろんな検定を知っていて, 場合に応じて正しい検定を選べる人, みたいな認識をされることもある.
+そのせいかどうかは知らないが, 医学系の人はモデリングよりも検定が好きな印象がある. 統計屋というと, いろんな検定を知っていて, 場合に応じて正しい検定を選べる人, みたいな認識をされることもある.
 
-なかでも, 医学系の人はノンパラメトリック検定が好きなようだ. 
+なかでもノンパラメトリック検定が好きなようだ. 
 
 ノンパラメトリック検定とは, 母集団に対して特定の確率分布を仮定しないで検定をする手法の総称とされる. 
 
@@ -36,7 +42,13 @@
 
 でも好みじゃないのでノンパラメトリック検定に関する相談には乗りませんというのも大人げないので, これからちょっとノンパラメトリック検定について勉強していきたいと思っている.
 
-この文書はそういったものだ.
+この文書はそういったものだ. 
+
+この文書がこれからどういったものになるかは, ぼくもまだわかってない.
+
+でも結びの言葉はなんとなくだけど決めてある. 
+
+「仮定を置かないんじゃなくて仮定を明確にして, アーチファクトをもってアーチファクトを制すのだ.」
 
 \section{ノンパラメトリック・モデル}
 
@@ -50,7 +62,11 @@
 
 ノンパラメトリック検定の話をする. 
 
-\section{符号検定}
+\section{仮説検定一般に関する注意点}
+
+
+
+\section{符号検定（Sign Test）}
 
 検定というのは帰無分布を一つ決めて, そこからのずれを測っている. 
 
@@ -58,12 +74,23 @@
 
 どうやらできるようだ.
 
-データを生成した分布が連続型の分布で, タイ（同順位）がないということだけを仮定しよう.
+データ $X_1, X_2, \ldots, X_n$ を生成した分布が連続型の分布関数 $F$ を持つということだけを仮定しよう. $\theta$ を $F$ の中央値とする. 
 
- 
+その上で母集団の中央値が0であるという帰無仮説を検定したい. 
+まず, 帰無仮説 $H_0: \theta = 0$, 対立仮説 $H_1: \theta > 0$ の片側検定を考える.
+
+そして, 
+\begin{align}
+S_n = \sum_{i=1}^{n} I_{\{X_i > 0\}}
+\end{align}
+という統計量を作ることにする. ここで $I_A$ は指示関数（つまり $X_i > 0$ なら 1, さもなくば 0 を返す）である. 
+
+$S_n$ は符号が + になった回数を単に数えただけだ. 
+
+帰無仮説のもとで, $S_n$ は二項分布 $\mathrm{Binomial}(n, 1/2)$ に従う.
+
+\subsection{シミュレーション}
 
 %\subsection{}
-
-
 
 \end{document}  
